@@ -35,3 +35,4 @@ class AnneeAcademique extends Model
 		return $this->hasMany(Pv::class, 'annee_academique_id');
 	}
 }
+
