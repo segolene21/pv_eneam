@@ -36,7 +36,11 @@
                             <div>
                                 <h4 class="mb-0 small">{{ auth()->user()->name }}</h4>
                                 <p class="mb-0 small text-secondary">
-                                    {{ auth()->user()->role === 'admin' ? 'Administrateur' : 'Chef de département' }}
+                                   {{ match (auth()->user()->role) {
+    'admin'            => 'Agent de scolarité',
+    'chef_departement' => 'Chef de département',
+    default            => 'Enseignant',
+} }}
                                 </p>
                             </div>
                         </div>
