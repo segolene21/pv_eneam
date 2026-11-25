@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('filieres', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+       Schema::create('filieres', function (Blueprint $table) {
+    $table->id();
+    $table->string('nom');
+    $table->string('code')->unique();
+    $table->timestamps();
+});
     }
 
     /**
