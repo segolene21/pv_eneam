@@ -110,15 +110,14 @@
                         </a>
                     </li>
                 @endif
-
-                @if (Route::has('users.index'))
-                    <li>
-                        <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}"
-                           href="{{ route('users.index') }}">
-                            <i class="ti ti-users"></i><span class="nav-text">Utilisateurs</span>
-                        </a>
-                    </li>
-                @endif
+                @if (Route::has('admin.users.index'))
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
+           href="{{ route('admin.users.index') }}">
+            <i class="ti ti-users"></i><span class="nav-text">Utilisateurs</span>
+        </a>
+    </li>
+@endif
             @endif
         </ul>
     </aside>
