@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Filiere;
+use App\Models\AnneeAcademique;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $ig = Filiere::firstOrCreate(['code' => 'IG'], ['nom' => 'Informatique de Gestion']);
+Filiere::firstOrCreate(['code' => 'PLAN'], ['nom' => 'Planification']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+AnneeAcademique::firstOrCreate(['libelle' => '2024-2025']);
+
+User::updateOrCreate(['email' => 'admin@pv.test'], [
+    'name' => 'Administrateur',
+    'password' => 'password',
+    'role' => 'admin',
+    'filiere_id' => null,
+    'must_change_password' => false,
+]);
+
+User::updateOrCreate(['email' => 'chef.ig@pv.test'], [
+    'name' => 'Chef IG',
+    'password' => 'password',
+    'role' => 'chef_departement',
+    'filiere_id' => $ig->id,
+    'must_change_password' => true,
+]);
     }
 }
