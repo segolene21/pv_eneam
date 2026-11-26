@@ -4,9 +4,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PvDepotController;
-use App\Http\Controllers\PvFichierController;
-use App\Http\Controllers\ArchiveController;
+
 // ===== TEMPORAIRE (personne 3) : données fictives, à supprimer quand PvController existera =====
 $fauxFilieres = function () {
     return collect([
@@ -108,12 +106,3 @@ Route::middleware('auth')->get('/pvs/{id}', function ($id) use ($fauxPvs) {
     return view('pvs.show', ['pv' => $pv]);
 })->whereNumber('id')->name('pvs.show');
 // ===== FIN TEMPORAIRE =====
-Route::middleware('auth')->group(function () {
-    Route::get('/depot', [PvDepotController::class, 'create'])->name('depot.create');
-    Route::post('/depot', [PvDepotController::class, 'store'])->name('depot.store');
-    Route::delete('/depot/{pv}', [PvDepotController::class, 'destroy'])->name('depot.destroy');
-    Route::get('/pvs/{pv}/apercu', [PvFichierController::class, 'apercu'])->name('pv.apercu');
-Route::get('/pvs/{pv}/telecharger', [PvFichierController::class, 'telecharger'])->name('pv.telecharger');
-Route::get('/archive', [ArchiveController::class, 'index'])->name('archive.index');
-Route::get('/archive/{id}', [ArchiveController::class, 'show'])->whereNumber('id')->name('archive.show');
-});

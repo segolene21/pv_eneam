@@ -77,14 +77,7 @@
                     <i class="ti ti-home"></i><span class="nav-text">Tableau de bord</span>
                 </a>
             </li>
-@if (auth()->user()->role === 'admin')
-    <li class="nav-item">
-        <a class="nav-link px-4 py-2 {{ request()->routeIs('depot.*') ? 'active' : '' }}"
-           href="{{ route('depot.create') }}">
-            <span class="nav-text">Déposer des PV</span>
-        </a>
-    </li>
-@endif
+
             @if (Route::has('pvs.index'))
                 <li>
                     <a class="nav-link {{ request()->routeIs('pvs.index', 'pvs.show') ? 'active' : '' }}"
