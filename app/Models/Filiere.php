@@ -1,38 +1,30 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Filiere
- * 
  * @property int $id
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * 
- * @property Collection|Pv[] $pvs
- * @property Collection|User[] $users
- *
- * @package App\Models
+ * @property string $nom
+ * @property string $code
  */
 class Filiere extends Model
 {
-	protected $table = 'filieres';
+    protected $table = 'filieres';
 
-	public function pvs()
-	{
-		return $this->hasMany(Pv::class);
-	}
+    protected $fillable = [
+        'nom',
+        'code',
+    ];
 
-	public function users()
-	{
-		return $this->hasMany(User::class);
-	}
+    public function pvs()
+    {
+        return $this->hasMany(Pv::class, 'filiere_code', 'code');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'filiere_code', 'code');
+    }
 }

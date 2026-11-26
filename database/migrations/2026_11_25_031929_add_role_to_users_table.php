@@ -13,7 +13,7 @@ return new class extends Migration
     {
        Schema::table('users', function (Blueprint $table) {
     $table->string('role')->default('chef_departement');
-    $table->foreignId('filiere_id')->nullable()->constrained()->nullOnDelete();
+    $table->string('filiere_code', 20)->nullable()->constrained('filieres', 'code')->nullOnDelete();
     $table->boolean('must_change_password')->default(true);
 });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
        Schema::table('users', function (Blueprint $table) {
-    $table->dropConstrainedForeignId('filiere_id');
+    $table->dropConstrainedForeignId('filiere_code');
     $table->dropColumn(['role', 'must_change_password']);
 });
     }
